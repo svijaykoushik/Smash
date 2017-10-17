@@ -1,0 +1,66 @@
+<NotepadPlus>
+    <Project name="Smash">
+        <Folder name="assets">
+            <Folder name="common">
+                <Folder name="audio">
+                    <File name="C:\xampp\htdocs\smash\assets\common\audio\background.mp3" />
+                    <File name="C:\xampp\htdocs\smash\assets\common\audio\brick.mp3" />
+                    <File name="C:\xampp\htdocs\smash\assets\common\audio\intro.mp3" />
+                    <File name="C:\xampp\htdocs\smash\assets\common\audio\menubg.mp3" />
+                    <File name="C:\xampp\htdocs\smash\assets\common\audio\menuClick.mp3" />
+                    <File name="C:\xampp\htdocs\smash\assets\common\audio\menudown.wav" />
+                    <File name="C:\xampp\htdocs\smash\assets\common\audio\menuHover.ogg" />
+                    <File name="C:\xampp\htdocs\smash\assets\common\audio\paddle.mp3" />
+                    <File name="C:\xampp\htdocs\smash\assets\common\audio\wall.wav" />
+                </Folder>
+            </Folder>
+            <Folder name="mobile">
+                <File name="C:\xampp\htdocs\smash\assets\mobile\background2.png" />
+                <File name="C:\xampp\htdocs\smash\assets\mobile\brick2.png" />
+                <File name="C:\xampp\htdocs\smash\assets\mobile\creator.png" />
+                <File name="C:\xampp\htdocs\smash\assets\mobile\logo.png" />
+                <File name="C:\xampp\htdocs\smash\assets\mobile\paddle2.png" />
+                <File name="C:\xampp\htdocs\smash\assets\mobile\pausebackground.png" />
+                <File name="C:\xampp\htdocs\smash\assets\mobile\progress.png" />
+                <File name="C:\xampp\htdocs\smash\assets\mobile\starfield.png" />
+                <File name="C:\xampp\htdocs\smash\assets\mobile\titlesprite.png" />
+                <File name="C:\xampp\htdocs\smash\assets\mobile\wobble2.png" />
+            </Folder>
+            <Folder name="pc">
+                <File name="C:\xampp\htdocs\smash\assets\pc\background2.png" />
+                <File name="C:\xampp\htdocs\smash\assets\pc\brick2.png" />
+                <File name="C:\xampp\htdocs\smash\assets\pc\creator.png" />
+                <File name="C:\xampp\htdocs\smash\assets\pc\logo.png" />
+                <File name="C:\xampp\htdocs\smash\assets\pc\paddle2.png" />
+                <File name="C:\xampp\htdocs\smash\assets\pc\pausebackground.png" />
+                <File name="C:\xampp\htdocs\smash\assets\pc\progress.png" />
+                <File name="C:\xampp\htdocs\smash\assets\pc\starfield.png" />
+                <File name="C:\xampp\htdocs\smash\assets\pc\titlesprite.png" />
+                <File name="C:\xampp\htdocs\smash\assets\pc\wobble2.png" />
+            </Folder>
+        </Folder>
+        <Folder name="engine">
+            <File name="C:\xampp\htdocs\smash\engine\phaser.min.js" />
+        </Folder>
+        <Folder name="js">
+            <File name="credits.js" />
+            <File name="gameover.js" />
+            <File name="intro.js" />
+            <File name="levelcomplete.js" />
+            <File name="levels.js" />
+            <File name="main.js" />
+            <File name="menu.js" />
+            <File name="mixins.js" />
+            <File name="options.js" />
+            <File name="play.js" />
+            <File name="smashworkspacenpp" />
+            <File name="splash.js" />
+            <File name="style.js" />
+            <File name="utils.js" />
+            <File name="stats.js" />
+            <File name="datastore.js" />
+            <File name="gamecomplete.js" />
+        </Folder>
+        <File name="C:\xampp\htdocs\smash\index.html" />
+    </Project>
+</NotepadPlus>
