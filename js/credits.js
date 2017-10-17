@@ -261,4 +261,3 @@ Credits.prototype = {
 		this.addCreditScreen(this.getCurrentPage(this.props.currentPage));
 	}
 }
-//# sourceURL=credits.js

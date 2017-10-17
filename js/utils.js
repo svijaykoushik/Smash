@@ -36,4 +36,3 @@ var utils = {
 		});
 	}
 };
-//# sourceURL=utils.js

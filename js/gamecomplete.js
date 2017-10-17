@@ -89,4 +89,3 @@ GameBeat.prototype = {
 		});
 	}
 };
-//# sourceURL=gamecomplete.js

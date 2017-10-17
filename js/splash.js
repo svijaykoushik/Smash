@@ -77,7 +77,7 @@ Splash.prototype = {
 	loadScripts: function(){
 		game.load.script('webfont','//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
 		game.load.script('FontAwesome','//use.fontawesome.com/d902360c6f.js');
-		game.load.script('mixins','js/mixins.js');
+		/*game.load.script('mixins','js/mixins.js');
 		game.load.script('levels','js/levels.js');
 		game.load.script('style','js/style.js');
 		game.load.script('Intro','js/intro.js');
@@ -88,7 +88,7 @@ Splash.prototype = {
 		game.load.script('LevelComplete','js/levelcomplete.js');
 		game.load.script('GameOver','js/gameover.js');
 		game.load.script('GameBeat','js/gamecomplete.js');
-		game.load.script('datastore','js/datastore.js');
+		game.load.script('datastore','js/datastore.js');*/
 	},
 	/**
 	 * Initializes the classes' properties.
@@ -180,4 +180,3 @@ Splash.prototype = {
 		console.log("%cAll Systems Go!", "color:white; background:green");
 	}
 };
-//# sourceURL=splash.js

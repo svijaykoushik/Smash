@@ -108,4 +108,3 @@
 		}
 	}
 })();
-//# sourceURL=style.js

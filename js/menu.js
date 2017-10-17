@@ -114,4 +114,3 @@ Menu.prototype = {
 };
 /*Mixes the mixins' properties with Menu.prototype's properties*/
 Phaser.Utils.mixinPrototype(Menu.prototype, mixins);
-//# sourceURL=menu.js

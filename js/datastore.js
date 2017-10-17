@@ -40,4 +40,3 @@
 	if(!datastore.hasLocalStorage()) console.warn("%c	Application doesnotsupport local storage	","background:#FCF8E3; color:#8A6D3B");
 	datastore.initLength();
  })();
- //# sourceURL=datastore.js

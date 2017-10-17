@@ -81,4 +81,3 @@ GameOver.prototype = {
 		});
 	}
 };
-//# sourceURL=gameover.js

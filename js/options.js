@@ -96,4 +96,3 @@ Options.prototype = {
 
 /*Mixes the mixins' properties with Options.prototype's properties*/
 Phaser.Utils.mixinPrototype(Options.prototype, mixins);
-//# sourceURL=options.js

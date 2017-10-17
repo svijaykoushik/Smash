@@ -52,4 +52,3 @@ Intro.prototype = {
 		},this);
 	}
 };
-//# sourceURL=intro.js

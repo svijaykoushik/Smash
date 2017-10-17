@@ -446,4 +446,3 @@ Play.prototype ={
 		game.paused = false;
 	}
 };
-//# sourceURL=play.js

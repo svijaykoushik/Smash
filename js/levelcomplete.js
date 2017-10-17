@@ -98,4 +98,3 @@ LevelComplete.prototype = {
 		});
 	}
 };
-//# sourceURL=levelcomplete.js

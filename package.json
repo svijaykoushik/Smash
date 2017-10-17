@@ -1,0 +1,23 @@
+{
+  "name": "smash-game",
+  "version": "1.2.1",
+  "description": "A breakout style arcade game",
+  "main": "js/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "smashm",
+    "breakout"
+  ],
+  "author": "Vijaykoushik,.S",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-inject": "^4.3.0",
+    "gulp-obfuscate": "^0.2.9",
+    "gulp-uglify": "^3.0.0",
+    "gulp-webserver": "^0.9.1"
+  }
+}

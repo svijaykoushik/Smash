@@ -84,8 +84,8 @@ main.prototype = {
 			game.load.image('gameIcon', 'assets/mobile/logo.png');
 			game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
 		}
-		game.load.script('utils','js/utils.js');
-		game.load.script('Splash','js/splash.js');
+		/*game.load.script('utils','js/utils.js');
+		game.load.script('Splash','js/splash.js');*/
 		game.scale.pageAlignHorizontally = true;
 		game.scale.pageAlignVertically = true;
 	},
