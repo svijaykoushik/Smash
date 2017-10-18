@@ -48,4 +48,4 @@ Temporary Items
 
 #Project Directories
 .vscode/*
-mode_modules/*
+node_modules/*

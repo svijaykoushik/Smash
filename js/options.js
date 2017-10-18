@@ -61,7 +61,7 @@ Options.prototype = {
 		game.add.existing(this.logo);
 		this.logo.frame = 1;
 		
-		musicPlayer.bgMusic.menuMusic.play();
+		if(!musicPlayer.bgMusic.menuMusic.isPlaying) musicPlayer.bgMusic.menuMusic.play();
 		
 		this.addMenuOption("Music: ".concat(gameOptions.playMusic?'Off ': 'On '), function(target, evenArg){
 			gameOptions.playMusic = !gameOptions.playMusic;

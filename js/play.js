@@ -34,7 +34,7 @@ Play.prototype ={
 	*/
 	init:function(){
 		this.score = globalData.currentScore;
-		this.lives = 3;
+		this.lives = globalData.playerLives;
 		this.playing = true;
 		this.ballOnPaddle = true;
 		this.pauseInitialized = false;
@@ -197,6 +197,7 @@ Play.prototype ={
 			if(this.bricks.countLiving() === 0) {
 				this.score += currentLevel*10;
 				globalData.currentScore = this.score;
+				globalData.playerLives = this.lives;
 				game.state.start('LevelComplete');
 				/*this.level++;
 				this.scoreText.text= this.score;

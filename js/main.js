@@ -48,6 +48,7 @@ var game = new Phaser.Game(1920, 1200, Phaser.CANVAS),
 	globalData={
 		currentScore: 0,
 		highScore: 5000,
+		playerLives: 3,
 		playerStats:{
 			progress: 0,
 			levels:{
