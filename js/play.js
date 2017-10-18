@@ -1,5 +1,5 @@
 /**
- *@author Vijaykoushik, S. {@link https://svijaykoushik.github.io|Author}
+ *@author Vijaykoushik, S. {@link https://svijaykoushik.github.io |Author}
  *@copyright 2017 Vijaykoushik, S.
 */
 /**************************/
