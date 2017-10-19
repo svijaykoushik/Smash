@@ -1,7 +1,7 @@
 var gulp = require('gulp'),
 concat = require('gulp-concat'),
 uglify = require('gulp-uglify'),
-obfuscate = require('gulp-obfuscate'),
+obfuscate = require('gulp-js-obfuscator'),
 inject = require('gulp-inject'),
 webserver = require('gulp-webserver')
 fileOrder = ['js/main.js', 'js/utils.js', 'js/splash.js','js/mixins.js', 'js/levels.js', 'js/style.js', 'js/intro.js', 'js/menu.js', 'js/options.js', 'js/credits.js', 'js/play.js', 'js/levelcomplete.js', 'js/gameover.js', 'js/gamecomplete.js', 'js/datastore.js'];
@@ -14,11 +14,14 @@ gulp.task('concat',function(){
 //obfuscate the file
 gulp.task('obfuscate', ['concat'], function(){
     return gulp.src('tmp/smashBuild.js')
-    .pipe(obfuscate({exclude: ['localStorage', 'window', 'document', 'init', 'preload', 'create', 'update', 'text', 'desktop', 'scaleMode', 'assets/pc/starfield.png', 'assets/pc/progress.png','assets/pc/logo.png', 'assets/mobile/starfield.png', 'assets/mobile/progress.png', 'assets/mobile/logo.png']}))
+    .pipe(obfuscate({
+        keepLinefeeds:true,
+        keepIndentations:true
+    }))
     .pipe(gulp.dest('./tmp/'));
 })
 //minify task
-gulp.task('minify', ['concat'],function(){
+gulp.task('minify', ['obfuscate'],function(){
     return gulp.src('tmp/smashBuild.js')
         .pipe(uglify())
         .pipe(gulp.dest('./tmp/'));
