@@ -77,6 +77,7 @@ Splash.prototype = {
 	loadScripts: function(){
 		game.load.script('webfont','//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
 		game.load.script('FontAwesome','//use.fontawesome.com/d902360c6f.js');
+		game.load.json('appManifest','appManifest.json');
 		/*game.load.script('mixins','js/mixins.js');
 		game.load.script('levels','js/levels.js');
 		game.load.script('style','js/style.js');

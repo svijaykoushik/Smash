@@ -43,7 +43,7 @@ var game = new Phaser.Game(1920, 1200, Phaser.CANVAS),
 		}
 	},
 	datastore = null,
-	currentLevel = 1,
+	currentLevel = 7,
 	levels= null,
 	globalData={
 		currentScore: 0,

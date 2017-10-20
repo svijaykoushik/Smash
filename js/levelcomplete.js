@@ -88,7 +88,7 @@ LevelComplete.prototype = {
 		datastore.setItem('playerStats', globalData.playerStats);
 		
 		game.time.events.add(Phaser.Timer.SECOND * 5, function(){
-			if(currentLevel < levels.level.length - 1){
+			if(currentLevel <  levels.level.length - 1){
 				game.state.start('Play');
 			}
 			else{

@@ -227,7 +227,8 @@ Credits.prototype = {
 		this.nextScreen = game.make.text(game.world.width - 60,game.world.centerY, "\uf054",this.navigatorStyle.credits);
 		this.backIcon = game.make.text(60, 150,"\uf0a8", this.navigatorStyle.backBtn);
 		this.logo = game.make.sprite(game.world.centerX, 120, 'title');
-		this.creditScreens = ["SMASH ", " ", "Version: 0.2.1", " ","Game Design, Game Developement"," ", "Vijay Koushik, S.", " ","MUSIC", " ","Awaiting Return","Cool Intro", "Doobly Doo", "by","Kevin MacLeod (incompetech.com)","Licensed under Creative Commons:", "By Attribution 3.0 License", " ", "SPECIAL THANKS"," ", "Phaser.io", "freesound.org", "MDN", "Stackoverflow.com", "html5gamedev.com"," "," "," ","svijaykoushik.github.io", "2017"];
+		this.manifest = game.cache.getJSON('appManifest');
+		this.creditScreens = [this.manifest.name.toUpperCase(), " ", "Version: " + this.manifest.version, " ","Game Design, Game Developement"," ", "Vijay Koushik, S.", " ","MUSIC", " ","Awaiting Return","Cool Intro", "Doobly Doo", "by","Kevin MacLeod (incompetech.com)","Licensed under Creative Commons:", "By Attribution 3.0 License", " ", "SPECIAL THANKS"," ", "Phaser.io", "freesound.org", "MDN", "Stackoverflow.com", "html5gamedev.com"," "," "," ","svijaykoushik.github.io", "2017"];
 		
 		this.props.totalPage = Math.ceil(this.creditScreens.length/this.props.pageSize);
 		this.pageFooter = game.make.text(game.world.centerX, game.world.height - 50, this.props.currentPage + " of " + this.props.totalPage, this.navigatorStyle.creditsText);

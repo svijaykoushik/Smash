@@ -43,6 +43,7 @@ Play.prototype ={
 			"data":levels.level[currentLevel].data
 		};
 		
+		this.manifest = game.cache.getJSON('appManifest');
 		this.paddle = game.make.sprite(game.world.width*0.5, game.world.height-50, 'paddle');
 		this.ball = game.make.sprite(game.world.width*0.5, this.paddle.y - 45, 'ball');
 		this.pauseScreen = game.make.sprite(game.world.centerX, game.world.centerY, 'pauseScreen');
@@ -372,8 +373,8 @@ Play.prototype ={
 	*/
 	render: function(){
 		//game.debug.text('render FPS: ' + (game.time.fps || '--') , 2, 14, "#00ff00");
-		game.debug.text('SMASH', 50, game.world.height - 250, "#00ff00", "50px Consolas");
-		game.debug.text('Version: 0.2.1' , 50, game.world.height - 200, "#00ff00", "50px Consolas");
+		game.debug.text(this.manifest.name.toUpperCase(), 50, game.world.height - 250, "#00ff00", "50px Consolas");
+		game.debug.text('Version: '+this.manifest.version , 50, game.world.height - 200, "#00ff00", "50px Consolas");
 		game.debug.text('render FPS: ' + (game.time.fps || '--') , 50, game.world.height - 150, "#00ff00", "50px Consolas");
 
 		if (game.time.suggestedFps !== null)

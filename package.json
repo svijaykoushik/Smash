@@ -14,12 +14,14 @@
   "license": "UNLICENSED",
   "devDependencies": {
     "gulp": "^3.9.1",
+    "gulp-bump": "^2.8.0",
     "gulp-concat": "^2.6.1",
     "gulp-inject": "^4.3.0",
     "gulp-js-obfuscator": "^1.0.0",
     "gulp-obfuscate": "^0.2.9",
     "gulp-uglify": "^3.0.0",
-    "gulp-webserver": "^0.9.1"
+    "gulp-webserver": "^0.9.1",
+    "run-sequence": "^2.2.0"
   },
   "dependencies": {}
 }
