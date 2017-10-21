@@ -75,14 +75,7 @@ GameBeat.prototype = {
 		
 		/* Reset Level */
 		currentLevel = 0;
-		
-		
-		globalData.playerStats.levels.highestLevel = currentLevel;
-		globalData.playerStats.levels.levelName = levels.level[currentLevel].title;
-		globalData.playerStats.score.highScore = globalData.highScore;
-		globalData.playerStats.score.playerScore = globalData.currentScore;
-		datastore.setItem('playerStats', globalData.playerStats);
-		
+				
 		game.time.events.add(Phaser.Timer.SECOND * 5, function(){
 			
 			game.state.start('Play');

@@ -45,9 +45,27 @@ gulp.task('buildApp',function(){
  * Bump the build revison
  */
 gulp.task('bumpBuild',function(){
-    return gulp.src("./appManifest.json")
+    return gulp.src(["./appManifest.json", "./package.json"])
     .pipe(bump())
-    .pipe(gulp.dest('./'))
+    .pipe(gulp.dest('./'));
+});
+/**
+ * Bump major revison
+ */
+gulp.task('bumpMajor', function(){
+    return gulp.src(["./appManifest.json", "./package.json"])
+    .pipe(bump({type:'major'}))
+    .pipe(bump())
+    .pipe(gulp.dest("./"));
+});
+/**
+ * Bump minor revison
+ */
+gulp.task('bumpMinor', function(){
+    return gulp.src(["./appManifest.json", "./package.json"])
+    .pipe(bump({type:'minor'}))
+    .pipe(bump())
+    .pipe(gulp.dest("./"));
 });
 //Serve project in webserver
 gulp.task('serveBuild',['buildApp'], function(){
