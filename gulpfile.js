@@ -15,12 +15,12 @@ gulp.task('concat',function(){
 });
 //obfuscate the file
 gulp.task('obfuscate', function(){
-    return gulp.src('tmp/smashBuild.js')
+    return gulp.src('./release/smashBuild.js')
     .pipe(obfuscate({
-        keepLinefeeds:true,
-        keepIndentations:true
+        keepLinefeeds:false,
+        keepIndentations:false
     }))
-    .pipe(gulp.dest('./tmp/'));
+    .pipe(gulp.dest('./release/'));
 })
 //minify task
 gulp.task('minify',function(){
@@ -74,4 +74,17 @@ gulp.task('serveBuild',['buildApp'], function(){
         port: 3000,
         liveReload: true
     }));
+});
+/**
+ * Copy file
+ */
+gulp.task('copy',function(){
+    return gulp.src(['./tmp/smashBuild.js','appManifest.json'])
+    .pipe(gulp.dest('./release/'));
+});
+/**
+ * Release a stable version of the game
+ */
+gulp.task('releaseApp',function(){
+    runSequence('buildApp','copy','obfuscate');
 });

@@ -122,7 +122,7 @@ Play.prototype ={
 			globalData.playerStats.score.highScore = globalData.highScore;
 			globalData.playerStats.score.playerScore = globalData.currentScore;
 			globalData.playerStats.progress = parseFloat((currentLevel / (levels.level.length - 1) * 100).toFixed(2));
-			if(globalData.playerStats.levels.highestLevel < currentLevel){				
+			if(globalData.playerStats.levels.highestLevel <= currentLevel){				
 				globalData.playerStats.levels.highestLevel = currentLevel;
 				globalData.playerStats.levels.levelName = levels.level[currentLevel].title;
 			}

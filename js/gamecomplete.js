@@ -74,11 +74,11 @@ GameBeat.prototype = {
 		game.add.existing(this.highScore);
 		
 		/* Reset Level */
-		currentLevel = 0;
+		currentLevel = 1;
 				
 		game.time.events.add(Phaser.Timer.SECOND * 5, function(){
 			
-			game.state.start('Play');
+			game.state.start('Menu');
 		});
 	}
 };
