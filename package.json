@@ -1,6 +1,6 @@
 {
   "name": "smash-game",
-  "version": "0.2.22",
+  "version": "0.2.24",
   "description": "A breakout style arcade game",
   "main": "js/main.js",
   "scripts": {
