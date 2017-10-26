@@ -42,7 +42,17 @@ Play.prototype ={
 			"title": levels.level[currentLevel].title,
 			"data":levels.level[currentLevel].data
 		};
-		
+		/**
+		 * Touch control plugin.
+		 * Added if device supports touch
+		 */
+		if(game.device.touch){
+			this.touchControl = game.plugins.add(Phaser.Plugin.TouchControl);
+			this.touchControl.inputEnable();
+			this.touchControl.settings.singleDirection = true;
+			this.touchControl.settings.maxDistanceInPixels = 200;
+		}
+
 		this.manifest = game.cache.getJSON('appManifest');
 		this.paddle = game.make.sprite(game.world.width*0.5, game.world.height-50, 'paddle');
 		this.ball = game.make.sprite(game.world.width*0.5, this.paddle.y - 45, 'ball');
@@ -337,7 +347,10 @@ Play.prototype ={
 	*/
 	update: function(){
 		if(this.playing) {
-			this.paddle.x = game.input.x || game.world.width*0.5;
+			if(game.device.touch && !!this.touchControl){
+				this.paddle.x += this.linearSpeed(this.touchControl.speed.x);
+			} 
+			else this.paddle.x = game.input.x || game.world.width*0.5;
 			if(this.paddle.x < 112.5) {
 				this.paddle.x = 112.5;
 			}
@@ -446,5 +459,23 @@ Play.prototype ={
 		this.pauseScreen.kill();
 		this.playing = true;
 		game.paused = false;
+	},
+	/**
+	 * EaseIn the speed of the paddle.
+	 * @method
+	 * @private
+	 * @param {number} x - ease in speed
+	 */
+	easeInSpeed: function(x){
+		return x * Math.abs(x) / 2000;
+	},
+	/**
+	 * Linear function for the speed of the paddle.
+	 * @method
+	 * @private
+	 * @param {number} x - linear speed
+	 */
+	linearSpeed: function(x){
+		return x / 2.5;
 	}
 };

@@ -52,6 +52,14 @@ Splash.prototype = {
 			game.load.image('creator', 'assets/mobile/creator.png');
 			game.load.spritesheet('ball', 'assets/mobile/wobble2.png', 60, 60);
 		}
+		/**
+		 * TouchControl plugin Assets.
+		 * These are common to both devices.
+		 * The key names shoudn't be modified.
+		 */
+		game.load.image('compass', 'assets/common/image/compass_rose.png');
+		game.load.image('touch_segment', 'assets/common/image/touch_segment.png');
+		game.load.image('touch', 'assets/common/image/touch.png');
 	},	
 	/**
 	 * Loads google fonts and FontAwesome fonts assets asyncronously.
@@ -77,6 +85,7 @@ Splash.prototype = {
 	loadScripts: function(){
 		game.load.script('webfont','//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
 		game.load.script('FontAwesome','//use.fontawesome.com/d902360c6f.js');
+		game.load.script('TouchControl','lib/phaser-touch-control.min.js');
 		game.load.json('appManifest','appManifest.json');
 		/*game.load.script('mixins','js/mixins.js');
 		game.load.script('levels','js/levels.js');
