@@ -77,7 +77,7 @@ GameBeat.prototype = {
 		currentLevel = 1;
 				
 		game.time.events.add(Phaser.Timer.SECOND * 5, function(){
-			
+			musicPlayer.bgMusic.gameMusic.stop();
 			game.state.start('Menu');
 		});
 	}

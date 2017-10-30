@@ -84,6 +84,7 @@ GameOver.prototype = {
 		 */
 		globalData.playerLives = 3;
 		game.time.events.add(Phaser.Timer.SECOND * 5, function(){
+			musicPlayer.bgMusic.gameMusic.stop();
 			game.state.start('Menu');
 		});
 	}

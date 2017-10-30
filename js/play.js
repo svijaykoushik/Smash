@@ -42,6 +42,9 @@ Play.prototype ={
 			"title": levels.level[currentLevel].title,
 			"data":levels.level[currentLevel].data
 		};
+		this.hitStreak = 0;
+		globalData.hitStreak = 0;
+		this.scoreBuffer = globalData.currentScore;
 		/**
 		 * Touch control plugin.
 		 * Added if device supports touch
@@ -75,14 +78,15 @@ Play.prototype ={
 		//this.startText = game.make.text(game.world.centerX, game.world.centerY, '- click to start -', this.textStyle);
 		this.startText = game.make.text(game.world.centerX, game.world.centerY, '- ' + this.levelStruct.title + ' -', this.textStyle);
 		this.pauseText = game.make.text(15, 15, 'Pause', this.textStyle);
-		this.scoreText = game.make.text(game.world.centerX, 45, this.score, this.textStyle);
+		this.scoreText = game.make.text(game.world.centerX, 45, this.scoreBuffer, this.textStyle);
 		this.livesText = game.make.text(game.world.width - 15, 15, 'Lives: '+ this.lives, this.textStyle);
 		this.livesText.anchor.set(1,0);
 		this.lifeLostText = game.make.text(game.world.width*0.5, game.world.height*0.5, 'Life lost, tap to continue', this.textStyle);
+		this.hitStreakText = game.make.text(Math.abs(game.world.centerX - (game.world.width - 15))/2, 45, "x" + this.hitStreak, this.textStyle);
 		this.lifeLostText.visible = false;
 		this.pause_menuitem_resume = game.make.text(this.pauseScreen.x, this.pauseScreen.y - 70, 'Resume', style.navItem._default);
 		this.pause_menuitem_menu = game.make.text(this.pauseScreen.x, this.pauseScreen.y + 120, 'Main Menu', style.navItem._default);
-		utils.centerGameObjects([this.paddle, this.ball, this.lifeLostText, this.startText, this.scoreText, this.pauseScreen, this.pause_menuitem_resume, this.pause_menuitem_menu]);
+		utils.centerGameObjects([this.paddle, this.ball, this.lifeLostText, this.startText, this.scoreText, this.pauseScreen, this.pause_menuitem_resume, this.pause_menuitem_menu, this.hitStreakText]);
 		
 	},
 	
@@ -114,6 +118,8 @@ Play.prototype ={
 	*/
 	ballLeaveScreen: function(){
 		this.lives--;
+		this.hitStreak = 0;
+		this.setHitStreak();	
 		if(this.lives) {
 			this.livesText.setText('Lives: '+ this.lives);
 			this.lifeLostText.text = 'Ball lost';
@@ -160,8 +166,10 @@ Play.prototype ={
 	*/
 	ballHitPaddle: function(ball, paddle){
 		var diff = 0;
+		this.hitStreak = 0;
 		ball.animations.play('wobble');
 		musicPlayer.SFXPlayer.paddleHit.play();
+		this.setHitStreak();
 		//ball.body.velocity.x = -1*10*(paddle.x - ball.x);
 		if(ball.x < paddle.x){
 			diff = paddle.x - ball.x;
@@ -207,6 +215,7 @@ Play.prototype ={
 			brick.kill();
 			if(this.bricks.countLiving() === 0) {
 				this.score += currentLevel*10;
+				this.hitStreak = 0;
 				globalData.currentScore = this.score;
 				globalData.playerLives = this.lives;
 				game.state.start('LevelComplete');
@@ -227,8 +236,15 @@ Play.prototype ={
 		killTween.start();
 		musicPlayer.SFXPlayer.brickHit.play();
 		this.score += 10;
-		if(this.score >= globalData.highScore) globalData.highScore = this.score;
-		this.scoreText.setText(this.score);
+		this.hitStreak += 1;
+		//if(this.score >= globalData.highScore) globalData.highScore = this.score;
+		if(this.isGreaterThanOrEqual(this.score, globalData.highScore)) globalData.highScore = this.score;
+		//this.scoreText.setText(this.score);		
+		//if(this.hitStreak >= globalData.hitStreak) globalData.hitStreak = this.hitStreak;
+		if(this.isGreaterThanOrEqual(this.hitStreak, globalData.hitStreak)) globalData.hitStreak = this.hitStreak;
+		//this.hitStreakText.setText("x" + this.hitStreak);
+		//this.animateText(this.scoreText);
+		this.setHitStreak();	
 	},
 	
 	/**
@@ -308,6 +324,7 @@ Play.prototype ={
 		game.add.existing(this.livesText);
 		game.add.existing(this.lifeLostText);
 		game.add.existing(this.startText);
+		game.add.existing(this.hitStreakText);
 		
 		if(musicPlayer.bgMusic.menuMusic.isPlaying) musicPlayer.bgMusic.menuMusic.stop();
 		//musicPlayer.bgMusic.gameMusic.volume = musicPlayer.bgmVolume;
@@ -361,8 +378,20 @@ Play.prototype ={
 				this.ball.x = this.paddle.x;
 			}
 			else{
-				game.physics.arcade.collide(this.ball, this.paddle, this.ballHitPaddle);
+				game.physics.arcade.collide(this.ball, this.paddle, this.ballHitPaddle, null, this);
 				game.physics.arcade.collide(this.ball, this.bricks, this.ballHitBrick, null, this);
+			}
+					
+			if(this.hitStreak < 1){
+				this.removeHitStreak();
+			}
+			else{
+				this.addHitStreak();
+			}
+
+			if(this.scoreBuffer < this.score){
+				this.scoreBuffer++;
+				this.scoreText.setText(this.scoreBuffer);
 			}
 		}
 	},
@@ -477,5 +506,64 @@ Play.prototype ={
 	 */
 	linearSpeed: function(x){
 		return x / 2.5;
+	},
+	/**
+	 * Remove hit streak text when it's zero
+	 * @method
+	 * @private
+	 */
+	removeHitStreak: function(){		
+		/*var killTween = game.add.tween(this.hitStreakText.scale);
+		killTween.to({x:0,y:0}, 200, Phaser.Easing.Linear.None);
+		killTween.onComplete.addOnce(function(){
+			this.hitStreakText.visible = false;
+		}, this);
+		killTween.start();*/
+		utils.fadeOut([this.hitStreakText],200)
+	},
+	/**
+	 * Add hit streak text when it's not zero
+	 * @method
+	 * @private
+	 */
+	addHitStreak: function(){
+		/*var ressuructTween = game.add.tween(this.hitStreakText.scale);
+		ressuructTween.to({x:1,y:1}, 200, Phaser.Easing.Linear.None);
+		ressuructTween.onComplete.addOnce(function(){
+			this.hitStreakText.visible = true;
+		}, this);
+		ressuructTween.start();*/
+		utils.fadeIn([this.hitStreakText],200)
+	},
+	/**
+	 * Scale hitstreak when ever a hit streak occurs
+	 * @method
+	 * @private
+	 * @param {Object} Object - objects that need to be animated.
+	 */
+	animateText: function(Object){
+		var animateTween = game.add.tween(Object.scale);
+		animateTween.to({x:1.5,y:1.5}, 100, Phaser.Easing.Linear.In).to({ x: 1, y: 1}, 100, Phaser.Easing.Linear.In);
+		animateTween.start();
+	},
+	/**
+	 * Set Hitstreak text and animate it
+	 * @method
+	 * @private
+	 */
+	setHitStreak: function(){
+		this.hitStreakText.setText("x" + this.hitStreak);
+		this.animateText(this.hitStreakText);
+	},
+	/**
+	 * Check if parameter 1 is greater than or equal to parameter 2
+	 * @method
+	 * @private
+	 * @param {number} number1 - The first parameter that is compared with second parameter.
+	 * @param {number} number2 - The second parameter that is compared to first parameter.
+	 * @returns {boolean}
+	 */
+	isGreaterThanOrEqual: function(number1, number2){
+		return number1 >= number2
 	}
 };
