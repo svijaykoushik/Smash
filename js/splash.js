@@ -86,6 +86,7 @@ Splash.prototype = {
 		game.load.script('webfont','//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
 		game.load.script('FontAwesome','//use.fontawesome.com/d902360c6f.js');
 		game.load.script('TouchControl','lib/phaser-touch-control.min.js');
+		game.load.script('VirtualFireworks','lib/VirtualFireworks.js');
 		game.load.json('appManifest','appManifest.json');
 		/*game.load.script('mixins','js/mixins.js');
 		game.load.script('levels','js/levels.js');

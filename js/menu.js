@@ -28,6 +28,7 @@ Menu.prototype = {
 		//this.menudown = game.make.audio('menudown');
 		this.fullscreenIcon = game.make.text(game.world.bounds.width - 100, game.world.bounds.height - 100,"\uf065", {font: "80px FontAwesome", fill:"#fff",stroke: "rgba(0,0,0,0)"});
 		this.optionCount = 1;
+		this.virtualFireworks = this.game.plugins.add(Phaser.Plugin.VirtualFireworks);
 	},
 	
 	/**
@@ -61,6 +62,8 @@ Menu.prototype = {
 	create: function(){
 		//game.add.tileSprite(0, 0, 480, 320, 'background');
 		game.add.existing(this.bgImg);
+		
+		this.virtualFireworks.draw();
 		
 		game.add.existing(this.logo);
 		this.logo.frame = 1;
@@ -110,6 +113,15 @@ Menu.prototype = {
 	menuConfig:{
 		startX: 192,
 		startY: 150
+	},
+	/**
+	* Updates the game every frame.
+	* Phaser framework method.
+	*@method
+	*@private
+   */
+	update: function(){
+		this.virtualFireworks.update();
 	}
 };
 /*Mixes the mixins' properties with Menu.prototype's properties*/
