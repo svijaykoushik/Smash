@@ -39,7 +39,7 @@ gulp.task('inject', function(){
  * Build the application without obfucation
  */
 gulp.task('buildApp',function(){
-    return runSequence(['concat','bumpBuild'],'inject');
+    return runSequence(['concat','bumpBuild'], 'minify','inject');
 });
 /**
  * Bump the build revison

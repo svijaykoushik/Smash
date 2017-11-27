@@ -53,7 +53,7 @@ Play.prototype ={
 			this.touchControl = game.plugins.add(Phaser.Plugin.TouchControl);
 			this.touchControl.inputEnable();
 			this.touchControl.settings.singleDirection = true;
-			this.touchControl.settings.maxDistanceInPixels = 200;
+			this.touchControl.settings.maxDistanceInPixels = 100;
 		}
 
 		this.manifest = game.cache.getJSON('appManifest');
