@@ -29,6 +29,7 @@ Menu.prototype = {
 		this.fullscreenIcon = game.make.text(game.world.bounds.width - 100, game.world.bounds.height - 100,"\uf065", {font: "80px FontAwesome", fill:"#fff",stroke: "rgba(0,0,0,0)"});
 		this.optionCount = 1;
 		this.virtualFireworks = this.game.plugins.add(Phaser.Plugin.VirtualFireworks);
+		//this.virtualFireworks.active = false;
 	},
 	
 	/**
@@ -74,17 +75,20 @@ Menu.prototype = {
 		
 		this.getPlayerStats();
 		
-		this.addMenuOption('Start', function(){
+		this.addMenuOption('Start', function(menu, context){
 			console.log("%c %c Start clicked. %c ","background:#192a43","color:white;background:#2d84b6","background:#192a43");
+			context.game.plugins.remove(context.virtualFireworks);
 			game.state.start('Play');
 		});
-		this.addMenuOption('Options', function(){
+		this.addMenuOption('Options', function(menu, context){
 			console.log("%c %c Options clicked. %c ","background:#192a43","color:white;background:#2d84b6","background:#192a43");
+			context.game.plugins.remove(context.virtualFireworks);
 			game.state.start("Options");
 		});
-		this.addMenuOption('Credits', function(){
+		this.addMenuOption('Credits', function(menu, context){
 			game.state.start('Credits');
 			console.log("%c %c Credits clicked. %c ","background:#192a43","color:white;background:#2d84b6","background:#192a43");
+			context.game.plugins.remove(context.virtualFireworks);
 		});
 		
 		this.add.existing(this.fullscreenIcon);

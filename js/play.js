@@ -193,7 +193,7 @@ Play.prototype ={
 		if(this.ballOnPaddle){
 			this.ballOnPaddle = false;
 			this.lifeLostText.visible = false;
-			this.ball.body.velocity.set(350, -350);
+			this.ball.body.velocity.set(350 + (currentLevel * 15), -(350 + (currentLevel * 15)));
 		}
 	},
 	
@@ -215,6 +215,7 @@ Play.prototype ={
 			brick.kill();
 			if(this.bricks.countLiving() === 0) {
 				this.score += currentLevel*10;
+				this.score *= globalData.hitStreak;
 				this.hitStreak = 0;
 				globalData.currentScore = this.score;
 				globalData.playerLives = this.lives;
@@ -235,8 +236,8 @@ Play.prototype ={
 		}, this);
 		killTween.start();
 		musicPlayer.SFXPlayer.brickHit.play();
-		this.score += 10;
 		this.hitStreak += 1;
+		this.score += (10 * this.hitStreak);
 		//if(this.score >= globalData.highScore) globalData.highScore = this.score;
 		if(this.isGreaterThanOrEqual(this.score, globalData.highScore)) globalData.highScore = this.score;
 		//this.scoreText.setText(this.score);		
@@ -316,7 +317,7 @@ Play.prototype ={
 		game.add.image(0, 0, 'background');
 		game.add.existing(this.paddle);
 		game.add.existing(this.ball);
-		
+
 		this.initBricks();
 		
 		game.add.existing(this.pauseText);
@@ -347,7 +348,6 @@ Play.prototype ={
 			}
 		}, this);
 		
-		console.log();
 		/*game.time.events.add(Phaser.Timer.SECOND * 4, function(){
 			this.bricks.callAll('kill');
 		},this);

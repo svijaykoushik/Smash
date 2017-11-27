@@ -39,7 +39,7 @@ gulp.task('inject', function(){
  * Build the application without obfucation
  */
 gulp.task('buildApp',function(){
-    return runSequence(['concat','bumpBuild'], 'minify','inject');
+    return runSequence(['concat','bumpBuild'],'inject');
 });
 /**
  * Bump the build revison
@@ -71,8 +71,8 @@ gulp.task('bumpMinor', function(){
 gulp.task('serveBuild',['buildApp'], function(){
     return gulp.src('./')
     .pipe(webserver({
-        port: 3000,
-        liveReload: true
+        host: "0.0.0.0",
+        port: 3000
     }));
 });
 /**

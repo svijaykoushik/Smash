@@ -57,11 +57,12 @@ LevelComplete.prototype = {
 		this.bgImg = game.make.image(0,0,'background');
 		this.levelBonus = game.make.text(game.world.centerX, 550, "Bonus: x" + currentLevel*10,this.styles.statsText);
 		this.score = game.make.text(game.world.centerX, 650, "Score: " + globalData.currentScore,this.styles.statsText);
-		this.highScore = game.make.text(game.world.centerX, 800, "Highscore: " + globalData.highScore,this.styles.statsText);
+		this.hitStreak = game.make.text(game.world.centerX, 725, "Continous Streak: x" + globalData.hitStreak,this.styles.statsText);
+		this.highScore = game.make.text(game.world.centerX, 900, "Highscore: " + globalData.highScore,this.styles.statsText);
 		// Game progress calculation
 		globalData.playerStats.progress = parseFloat((currentLevel / (levels.level.length - 1) * 100).toFixed(2));
 		this.progress = game.make.text(game.world.centerX, 400, "Progress: " + globalData.playerStats.progress + "%",this.styles.statsText);
-		utils.centerGameObjects([this.title, this.levelBonus,this.score,this.highScore, this.progress]);
+		utils.centerGameObjects([this.title, this.levelBonus,this.score,this.highScore, this.progress,this.hitStreak]);
 	},
 	/**
 	 * Adds the created credits screen to the canvas.
@@ -75,6 +76,7 @@ LevelComplete.prototype = {
 		game.add.existing(this.title);
 		game.add.existing(this.levelBonus);
 		game.add.existing(this.score);
+		game.add.existing(this.hitStreak);
 		game.add.existing(this.highScore);
 		
 		/* Increment Level */
