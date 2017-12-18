@@ -57,7 +57,7 @@ LevelComplete.prototype = {
 		this.bgImg = game.make.image(0,0,'background');
 		this.levelBonus = game.make.text(game.world.centerX, 550, "Bonus: x" + currentLevel*10,this.styles.statsText);
 		this.score = game.make.text(game.world.centerX, 650, "Score: " + globalData.currentScore,this.styles.statsText);
-		this.hitStreak = game.make.text(game.world.centerX, 725, "Continous Streak: x" + globalData.hitStreak,this.styles.statsText);
+		this.hitStreak = game.make.text(game.world.centerX, 750, "Continous Streak: x" + globalData.hitStreak,this.styles.statsText);
 		this.highScore = game.make.text(game.world.centerX, 900, "Highscore: " + globalData.highScore,this.styles.statsText);
 		// Game progress calculation
 		globalData.playerStats.progress = parseFloat((currentLevel / (levels.level.length - 1) * 100).toFixed(2));

@@ -53,12 +53,13 @@ GameOver.prototype = {
 	 *@private
 	*/
 	init:function(){
-		
+		this.score = globalData.currentScore;
+		globalData.currentScore = 0;
 		this.bgImg = game.make.image(0,0,'background');
 		this.titleText = game.make.text(game.world.centerX, 100, "Game Over", this.styles.titleText);
 		this.highestLevel = game.make.text(game.world.centerX, game.world.centerY - 100, "Highest level: " + globalData.playerStats.levels.highestLevel, this.styles.statsText);
 		this.highScore = game.make.text(game.world.centerX, game.world.centerY + 100, "High score: " + globalData.playerStats.score.highScore, this.styles.statsText);
-		this.lastScore = game.make.text(game.world.centerX, game.world.centerY + 300, "Score: " + globalData.currentScore, this.styles.statsText);
+		this.lastScore = game.make.text(game.world.centerX, game.world.centerY + 300, "Score: " + this.score, this.styles.statsText);
 		this.progress = game.make.text(game.world.centerX, game.world.centerY - 250, "Progress: " + globalData.playerStats.progress + "%",this.styles.statsText);
 		utils.centerGameObjects([this.titleText, this.highestLevel, this.highScore, this.lastScore, this.progress]);
 	},

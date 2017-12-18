@@ -6,6 +6,11 @@ inject = require('gulp-inject'),
 webserver = require('gulp-webserver'),
 runSequence = require('run-sequence'),
 bump = require('gulp-bump'),
+merge = require('merge-stream'),
+rename = require('gulp-rename'),
+zip = require('gulp-zip'),
+gulpversiontag = require("gulp-version-tag"),
+clean = require('gulp-clean'),
 fileOrder = ['js/main.js', 'js/utils.js', 'js/splash.js','js/mixins.js', 'js/levels.js', 'js/style.js', 'js/intro.js', 'js/menu.js', 'js/options.js', 'js/credits.js', 'js/play.js', 'js/levelcomplete.js', 'js/gameover.js', 'js/gamecomplete.js', 'js/datastore.js'];
 //concat files into a single file
 gulp.task('concat',function(){
@@ -39,7 +44,8 @@ gulp.task('inject', function(){
  * Build the application without obfucation
  */
 gulp.task('buildApp',function(){
-    return runSequence(['concat','bumpBuild'], 'minify','inject');
+    //return runSequence(['concat','bumpBuild'], 'minify','inject');
+    return runSequence(['concat','bumpBuild'],'inject');
 });
 /**
  * Bump the build revison
@@ -83,8 +89,61 @@ gulp.task('copy',function(){
     .pipe(gulp.dest('./release/'));
 });
 /**
- * Release a stable version of the game
+ * The following tasks help to release a stable version of the game.
+ * 1. Copy all the assets and libraries to the release folder
+ * 2. Copy the Builded app
+ * 3. obfuscate the file
+ * 4. Rename the app file to "smash.js"
+ * 5. Inject the file to the index page
  */
-gulp.task('releaseApp',function(){
-    runSequence('buildApp','copy','obfuscate');
+//1 & 2. copy the assets & Copy the Builded app
+gulp.task('copyAssets',function(){
+    var buildedApp = gulp.src(['./tmp/smashBuild.js','appManifest.json', './index.html'])
+    .pipe(gulp.dest('./release/demo/'));
+    var assets = gulp.src(["./assets/**/*", "./engine/*", "lib/*"],{base:'.'})
+    .pipe(gulp.dest('./release/demo/'));
+    return merge(assets,buildedApp);
+});
+//2. obfuscate the release file
+gulp.task('obfuscateRelease', ['copyAssets'],function(){
+    return gulp.src('./release/demo/smashBuild.js')
+    .pipe(obfuscate({
+        keepLinefeeds:false,
+        keepIndentations:false
+    }))
+    .pipe(gulp.dest('./release/demo/'));
+});
+//4. Rename the app file to "smash.js"
+gulp.task('renameRelease',['obfuscateRelease'],function(){
+    return gulp.src('./release/demo/smashBuild.js')
+    .pipe(rename('smash.js'))
+    .pipe(gulp.dest('./release/demo/'));
+});
+//5. Inject the file to the index page
+gulp.task('injectRelease',['renameRelease'], function(){
+    var js = gulp.src('./release/demo/smash.js');
+    return gulp.src('./release/demo/index.html')
+        .pipe(inject(js, { relative:true }))
+        .pipe(gulp.dest('./release/demo/'));
+});
+
+gulp.task('releaseApp',['injectRelease'],function(){
+    var zipaction = gulp.src('./release/demo/*')
+    .pipe(zip('smash.zip'))
+    .pipe(gulp.dest('./release/dist/'));
+    var tagVersion = gulp.src('./release/dist/smash.zip')
+    .pipe(gulpversiontag(__dirname,'./package.json'))
+    .pipe(gulp.dest('./release/dist/'));
+    var cleanSource = gulp.src('./release/dist/smash.zip',{read:false})
+    .pipe(clean());
+    return merge(zipaction,tagVersion,cleanSource);
+});
+
+// Serve the release demo
+gulp.task('serveRelease',['injectRelease'], function(){
+    return gulp.src('./release/demo/')
+    .pipe(webserver({
+        host: "0.0.0.0",
+        port: 3000
+    }));
 });

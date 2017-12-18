@@ -218,6 +218,7 @@ Play.prototype ={
 				this.score *= globalData.hitStreak;
 				this.hitStreak = 0;
 				globalData.currentScore = this.score;
+				if(this.isGreaterThanOrEqual(this.score, globalData.highScore)) globalData.highScore = this.score;
 				globalData.playerLives = this.lives;
 				game.state.start('LevelComplete');
 				/*this.level++;
@@ -416,6 +417,7 @@ Play.prototype ={
 	render: function(){
 		//game.debug.text('render FPS: ' + (game.time.fps || '--') , 2, 14, "#00ff00");
 		game.debug.text(this.manifest.name.toUpperCase(), 50, game.world.height - 250, "#00ff00", "50px Consolas");
+		game.debug.text('Alpha', 250, game.world.height - 250, "#00ff00", "50px Consolas");
 		game.debug.text('Version: '+this.manifest.version , 50, game.world.height - 200, "#00ff00", "50px Consolas");
 		game.debug.text('render FPS: ' + (game.time.fps || '--') , 50, game.world.height - 150, "#00ff00", "50px Consolas");
 
