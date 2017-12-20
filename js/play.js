@@ -49,7 +49,7 @@ Play.prototype ={
 		 * Touch control plugin.
 		 * Added if device supports touch
 		 */
-		if(game.device.touch){
+		if(game.device.touch && !game.device.desktop){
 			this.touchControl = game.plugins.add(Phaser.Plugin.TouchControl);
 			this.touchControl.inputEnable();
 			this.touchControl.settings.singleDirection = true;
@@ -365,7 +365,7 @@ Play.prototype ={
 	*/
 	update: function(){
 		if(this.playing) {
-			if(game.device.touch && !!this.touchControl){
+			if(game.device.touch && !!this.touchControl && !game.device.desktop){
 				this.paddle.x += this.linearSpeed(this.touchControl.speed.x);
 			} 
 			else this.paddle.x = game.input.x || game.world.width*0.5;

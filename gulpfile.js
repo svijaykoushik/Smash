@@ -44,8 +44,8 @@ gulp.task('inject', function(){
  * Build the application without obfucation
  */
 gulp.task('buildApp',function(){
-    //return runSequence(['concat','bumpBuild'], 'minify','inject');
-    return runSequence(['concat','bumpBuild'],'inject');
+    return runSequence(['concat','bumpBuild'], 'minify','inject');
+    //return runSequence(['concat','bumpBuild'],'inject');
 });
 /**
  * Bump the build revison
@@ -106,12 +106,10 @@ gulp.task('copyAssets',function(){
 });
 //2. obfuscate the release file
 gulp.task('obfuscateRelease', ['copyAssets'],function(){
-    return gulp.src('./release/demo/smashBuild.js')
-    .pipe(obfuscate({
+    return gulp.src('./release/demo/smashBuild.js').pipe(obfuscate({
         keepLinefeeds:false,
         keepIndentations:false
-    }))
-    .pipe(gulp.dest('./release/demo/'));
+    })).pipe(gulp.dest('./release/demo/'));
 });
 //4. Rename the app file to "smash.js"
 gulp.task('renameRelease',['obfuscateRelease'],function(){
@@ -128,6 +126,8 @@ gulp.task('injectRelease',['renameRelease'], function(){
 });
 
 gulp.task('releaseApp',['injectRelease'],function(){
+    //var cleanDir = gulp.src('./release/dist/',{read:false})
+    //.pipe(clean());
     var zipaction = gulp.src('./release/demo/*')
     .pipe(zip('smash.zip'))
     .pipe(gulp.dest('./release/dist/'));
@@ -135,8 +135,9 @@ gulp.task('releaseApp',['injectRelease'],function(){
     .pipe(gulpversiontag(__dirname,'./package.json'))
     .pipe(gulp.dest('./release/dist/'));
     var cleanSource = gulp.src('./release/dist/smash.zip',{read:false})
-    .pipe(clean());
+    .pipe(clean({force: true}));
     return merge(zipaction,tagVersion,cleanSource);
+    //return zipaction;
 });
 
 // Serve the release demo
