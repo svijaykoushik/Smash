@@ -3,7 +3,7 @@
  *@copyright 2017 Vijaykoushik, S.
 */
 /**************************/
-/*	Play gmae			 */
+/*	Play gamae			 */
 /************************/
 /**
  *@classdesc
@@ -75,7 +75,6 @@ Play.prototype ={
 		this.ball.events.onOutOfBounds.add(this.ballLeaveScreen, this);
 		
 		
-		//this.startText = game.make.text(game.world.centerX, game.world.centerY, '- click to start -', this.textStyle);
 		this.startText = game.make.text(game.world.centerX, game.world.centerY, '- ' + this.levelStruct.title + ' -', this.textStyle);
 		this.pauseText = game.make.text(15, 15, 'Pause', this.textStyle);
 		this.scoreText = game.make.text(game.world.centerX, 45, this.scoreBuffer, this.textStyle);
@@ -126,14 +125,8 @@ Play.prototype ={
 			this.lifeLostText.visible = true;
 			this.ballOnPaddle = true;
 			this.resetBall();
-			/*game.input.onDown.addOnce(function(){
-				this.lifeLostText.visible = false;
-				this.releaseBall();
-			}, this);*/
 		}
 		else {
-			/*alert('You lost, game over!');
-			location.reload();*/
 			globalData.currentScore = this.score;
 			globalData.playerStats.score.highScore = globalData.highScore;
 			globalData.playerStats.score.playerScore = globalData.currentScore;
@@ -170,7 +163,6 @@ Play.prototype ={
 		ball.animations.play('wobble');
 		musicPlayer.SFXPlayer.paddleHit.play();
 		this.setHitStreak();
-		//ball.body.velocity.x = -1*10*(paddle.x - ball.x);
 		if(ball.x < paddle.x){
 			diff = paddle.x - ball.x;
 			ball.body.velocity.x = (-10 * diff);
@@ -200,7 +192,7 @@ Play.prototype ={
 	/**
 	 * Event handler that is executed when ball hits any of the bricks.
 	 * Destroys the brick that the ball hits.
-	 * Plays tweening animation when the brick is destroyed.
+	 * Plays animation when the brick is destroyed.
 	 * Performs score calculation.
 	 * Determines the level complete state.
 	 *@method
@@ -221,31 +213,14 @@ Play.prototype ={
 				if(this.isGreaterThanOrEqual(this.score, globalData.highScore)) globalData.highScore = this.score;
 				globalData.playerLives = this.lives;
 				game.state.start('LevelComplete');
-				/*this.level++;
-				this.scoreText.text= this.score;
-				this.lifeLostText.text = '- Level ' + this.level + '-';
-				this.lifeLostText.visible = true;
-				this.ballOnPaddle = true;
-				this.ball.body.velocity.set(0);
-				this.resetBall();
-				this.bricks.callAll('revive');
-				this.bricks.forEachAlive(function(revivedBrick){
-					var reviveTween = game.add.tween(revivedBrick.scale);
-					reviveTween.to({x:1,y:1}, 100, Phaser.Easing.Linear.None,true);
-				},this);*/
 			}
 		}, this);
 		killTween.start();
 		musicPlayer.SFXPlayer.brickHit.play();
 		this.hitStreak += 1;
 		this.score += (10 * this.hitStreak);
-		//if(this.score >= globalData.highScore) globalData.highScore = this.score;
 		if(this.isGreaterThanOrEqual(this.score, globalData.highScore)) globalData.highScore = this.score;
-		//this.scoreText.setText(this.score);		
-		//if(this.hitStreak >= globalData.hitStreak) globalData.hitStreak = this.hitStreak;
 		if(this.isGreaterThanOrEqual(this.hitStreak, globalData.hitStreak)) globalData.hitStreak = this.hitStreak;
-		//this.hitStreakText.setText("x" + this.hitStreak);
-		//this.animateText(this.scoreText);
 		this.setHitStreak();	
 	},
 	
@@ -271,18 +246,6 @@ Play.prototype ={
 		this.bricks = game.add.group();
 		this.bricks.enableBody = true;
 		this.bricks.physicsBodyType = Phaser.Physics.ARCADE;
-		/*for(var c=0; c<this.brickInfo.count.col; c++) {
-			for(var r=0; r<this.brickInfo.count.row; r++) {
-				var brickX = (r*(this.brickInfo.width + this.brickInfo.padding)) + this.brickInfo.offset.left;
-				var brickY = (c*(this.brickInfo.height + this.brickInfo.padding)) + this.brickInfo.offset.top;
-				//this.newBrick = game.add.sprite(brickX, brickY, 'brick');
-				this.newBrick = this.bricks.create(brickX, brickY, 'brick');
-				//game.physics.enable(this.newBrick, Phaser.Physics.ARCADE);
-				this.newBrick.body.immovable = true;
-				//this.newBrick.anchor.set(0.5);
-				//this.bricks.add(this.newBrick);
-			}
-		}*/
 		for(var c=0; c<this.brickInfo.count.col; c++) {
 			for(var r=0; r<this.brickInfo.count.row; r++) {
 				if(this.levelStruct.data[c][r] == 1){
@@ -329,12 +292,9 @@ Play.prototype ={
 		game.add.existing(this.hitStreakText);
 		
 		if(musicPlayer.bgMusic.menuMusic.isPlaying) musicPlayer.bgMusic.menuMusic.stop();
-		//musicPlayer.bgMusic.gameMusic.volume = musicPlayer.bgmVolume;
 		musicPlayer.bgMusic.gameMusic.loop = true;
 		musicPlayer.bgMusic.gameMusic.play();
 		
-		//this.startText.inputEnabled = true;
-		//this.startText.events.onInputUp.add(this.startGame, this);
 		this.pauseText.inputEnabled = true;
 		this.pauseText.events.onInputUp.add(this.showPauseScreen, this);
 		
@@ -348,13 +308,6 @@ Play.prototype ={
 				this.playing = true;
 			}
 		}, this);
-		
-		/*game.time.events.add(Phaser.Timer.SECOND * 4, function(){
-			this.bricks.callAll('kill');
-		},this);
-		game.time.events.add(Phaser.Timer.SECOND * 8, function(){
-			this.bricks.callAll('revive');
-		},this);*/
 	},
 	
 	/**
@@ -398,7 +351,7 @@ Play.prototype ={
 	},
 	
 	/**
-	 * Loads the assests and prepares them to render in the canvas.
+	 * Loads the assets and prepares them to render in the canvas.
 	 * Phaser framework method.
 	 *@method
 	 *@private
@@ -515,12 +468,6 @@ Play.prototype ={
 	 * @private
 	 */
 	removeHitStreak: function(){		
-		/*var killTween = game.add.tween(this.hitStreakText.scale);
-		killTween.to({x:0,y:0}, 200, Phaser.Easing.Linear.None);
-		killTween.onComplete.addOnce(function(){
-			this.hitStreakText.visible = false;
-		}, this);
-		killTween.start();*/
 		utils.fadeOut([this.hitStreakText],200)
 	},
 	/**
@@ -529,16 +476,10 @@ Play.prototype ={
 	 * @private
 	 */
 	addHitStreak: function(){
-		/*var ressuructTween = game.add.tween(this.hitStreakText.scale);
-		ressuructTween.to({x:1,y:1}, 200, Phaser.Easing.Linear.None);
-		ressuructTween.onComplete.addOnce(function(){
-			this.hitStreakText.visible = true;
-		}, this);
-		ressuructTween.start();*/
 		utils.fadeIn([this.hitStreakText],200)
 	},
 	/**
-	 * Scale hitstreak when ever a hit streak occurs
+	 * Scale hit streak when ever a hit streak occurs
 	 * @method
 	 * @private
 	 * @param {Object} Object - objects that need to be animated.
@@ -549,7 +490,7 @@ Play.prototype ={
 		animateTween.start();
 	},
 	/**
-	 * Set Hitstreak text and animate it
+	 * Set Hit streak text and animate it
 	 * @method
 	 * @private
 	 */
