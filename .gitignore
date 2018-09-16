@@ -49,3 +49,9 @@ Temporary Items
 #Project Directories
 .vscode/*
 node_modules/*
+tmp/*
+release/*
+
+#Project Files
+gulpfile.js
+package.json
