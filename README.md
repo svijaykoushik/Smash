@@ -4,5 +4,5 @@ I built this game as a personal project while Learning game development in HTML5
 
 ## Screenshots
 
-![screenshot 1](./screenshots/ss_1.png)
-![screenshot 2](./screenshots/ss_2.png)
+![screenshot 1](https://github.com/svijaykoushik/Smash/blob/master/screenshots/ss_1.PNG)
+![screenshot 2](https://github.com/svijaykoushik/Smash/blob/master/screenshots/ss_2.PNG)
